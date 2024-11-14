@@ -23,17 +23,24 @@ public class Sandwich {
 
             System.out.println("Select your bread choice: ");
             System.out.println("Wheat bread, oat bread, almond bread, 2% bread...wait this list is milk");
+            scanner.nextLine();
             String bread = scanner.nextLine();
+            System.out.println(bread);
+            this.setBread(bread);
             //This could easily be the bread choice
 
             System.out.println("Select your sandwich size: ");
             System.out.println("4\", 8\", or 12\"");
-            String size = scanner.nextLine();
+            int size = scanner.nextInt();
+            System.out.println(size);
+            this.setSize(size);
             //small, medium, large will yield various prices
 
             System.out.println("Toppings: ");
             System.out.println("Select your meat choice: steak, ham, salami, roast beef, chicken, bacon");
+            scanner.nextLine();
             String meat = scanner.nextLine();
+            this.setMeat(meat);
 
             System.out.println("Select your cheese: american, provolone, cheddar, swiss");
             String cheese = scanner.nextLine();
@@ -42,16 +49,50 @@ public class Sandwich {
             String option = scanner.nextLine();
 
             if (option.equalsIgnoreCase("yes")) {
-                System.out.println("Which would you like extra of?: ");
-                System.out.println("1) Meat \n2) Cheese \n3) both!");
-                int extra = scanner.nextInt();
+                price = getPrice() + getExtra();
+            } else {
+                price = getPrice();
             }
 
-            this.getPrice();
 
             System.out.println("Here is your sandwich!");
-            return size + " " + bread + " bread " + meat + " sandwich with " + cheese + " " + this.getPrice();
-            //Size can determine the prices. N/A can be an option for no price on it?
+            System.out.println(size + " " + bread + " bread " + meat + " sandwich with " + cheese + " cheese " + price);
+            return size + bread + meat + cheese + price;
+            //price is not generating
+    }
+    public double getExtra() {
+
+            Scanner some = new Scanner(System.in);
+            System.out.println("How much extra meat would you like?");
+            int extraMeat = some.nextInt();
+
+            System.out.println("How much extra cheese would you like?");
+            int extraCheese = some.nextInt();
+
+            double upMeat = 0.0;
+            if (size == 4) {
+                upMeat = .50;
+            } else if (size == 8) {
+                upMeat = 1.00;
+            } else if (size == 12) {
+                upMeat = 1.50;
+            } else {
+                upMeat = 0.0;
+            }
+
+            double upCheese = 0.0;
+            if (size == 4) {
+                upCheese = .30;
+            } else if (size == 8) {
+                upCheese = .60;
+            } else if (size == 12) {
+                upCheese = .90;
+            } else {
+                upCheese = 0.0;
+            }
+
+            double extra = (extraMeat * upMeat) + (extraCheese * upCheese);
+            return extra;
     }
     public int getSize() {
         return size;
@@ -62,36 +103,15 @@ public class Sandwich {
     }
 
     public double getPrice() {
-        ArrayList<Double> small = new ArrayList<>();
-        small.add(5.50);
-        small.add(1.00);
-        small.add(0.50);
-        small.add(0.75);
-        small.add(0.30);
-
-        ArrayList<Double> medium = new ArrayList<>();
-        medium.add(7.00);
-        medium.add(2.00);
-        medium.add(1.00);
-        medium.add(1.50);
-        medium.add(0.60);
-
-        ArrayList<Double> large = new ArrayList<>();
-        large.add(8.50);
-        large.add(3.00);
-        large.add(1.50);
-        large.add(2.25);
-        large.add(0.90);
-
-        HashMap<Integer, ArrayList<Double>> sandwich = new HashMap<>();
-        sandwich.put(4, small);
-        sandwich.put(8, medium);
-        sandwich.put(12, large);
-
-        ArrayList<Double> retrieve = sandwich.get(size);
-        if ((retrieve != null && !retrieve.isEmpty())) {
-            price = retrieve.get(0);
-        }
+       if (size == 4) {
+           price = 7.25;
+       } else if (size == 8) {
+           price = 10.50;
+       } else if (size == 12) {
+           price = 13.75;
+       } else {
+           price = 0;
+       }
         return price;
     }
 

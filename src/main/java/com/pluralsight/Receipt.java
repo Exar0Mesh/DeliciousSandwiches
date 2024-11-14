@@ -7,17 +7,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Receipt {
-    public static void generate(String sandwichDetails, double price, double totalPrice) {
+    public static void generate(String orderDetails, double totalPrice) {
 
         try {
-            String fileCreate = fileName();
-            FileWriter fileWriter = new FileWriter("src/main/resources/" + fileCreate + ".txt");
+            //1. The file is not printing anything
+            //2. Total price is nothing
+            //3. Idk whats wrong
+            FileWriter fileWriter = new FileWriter("src/main/resources/" + fileName() + ".txt", true);
             BufferedWriter writer = new BufferedWriter(fileWriter);
-            writer.write("The receipt information here");
-            //Need the information from the additions HERE
-            writer.write("Sandwich Details: " + sandwichDetails);
-            writer.newLine();
-            writer.write("Price: $" + price);
+            writer.write("Sandwich Details: " + orderDetails);
             writer.newLine();
 
             // Write total price to file
@@ -26,6 +24,7 @@ public class Receipt {
             writer.write("-----------------------------");
             writer.newLine();
 
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

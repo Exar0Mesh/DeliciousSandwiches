@@ -21,37 +21,43 @@ public class Screen {
             }
 
         if (home == 1) {
-            while (true) {
-
+            while (home != 0) {
             System.out.println("Time for Deli picking. What would you like to order?");
-                System.out.println("1) Add Sandwich");
-                System.out.println("2) Add Drink");
-                System.out.println("3) Add Chips");
-                System.out.println("4) Checkout");
-                System.out.println("0) Cancel Order");
+
+            System.out.println("1) Add Sandwich");
+            System.out.println("2) Add Drink");
+            System.out.println("3) Add Chips");
+            System.out.println("4) Checkout");
+            System.out.println("0) Cancel Order");
 
             int order = scanner.nextInt();
+
 
                 switch (order) {
                     case 1:
                         System.out.println("Add Sandwich");
                         Sandwich sandwich = new Sandwich();
                         sandwich.readSandwich(scanner);
-                        double sandwichPrice = sandwich.getPrice();
-                        int i = 0;
-                        i++;
-                        totalPrice += sandwichPrice * i;
-                        System.out.println("Sandwich added to order. Price: $" + sandwichPrice);
+                        double sandwichPrice = (sandwich.getPrice());
+                        totalPrice += sandwichPrice;
+                        String fixings = sandwich.getBread() + ", " + sandwich.getMeat() + ", " + sandwich.getSize() + ", " + sandwich.getPrice();
+                        //Make this an array or hashmap?
                         break;
+
                     case 2:
                         System.out.println("Add Drink");
                         OtherProducts drink = new OtherProducts();
-                        System.out.println(drink.readDrink(scanner));
+                        drink.readDrink(scanner);
+                        double drinkPrice = drink.getDrinkPrice();
+                        totalPrice += drinkPrice;
                         break;
                     case 3:
                         System.out.println("Add Chips");
                         OtherProducts chips = new OtherProducts();
-                        System.out.println(chips.readChips(scanner));
+                        chips.readChips(scanner);
+                        double chipsPrice = chips.getChipPrice();
+                        totalPrice += chipsPrice;
+                        System.out.println("Chips added to order. Price: $" + chipsPrice);
                         break;
                     case 4:
                         System.out.println("Checkout");
@@ -61,6 +67,7 @@ public class Screen {
                         //loop out
                         System.out.println("Cancelling order\n");
                         totalPrice = 0;
+                        home = 0;
                         break;
                     default:
                         System.out.println("Invalid option, try again");
@@ -75,7 +82,7 @@ public class Screen {
     //Each option will cost something
     //Price could be a key for a hashmap
 
-    public static void checkout(double totalPrice) {
+    public static void checkout(String fixings, double totalPrice) {
         //Should include the other methods, their price, and the such
         //Should include all the options that require payment, including meats, extra items, and such. Drinks and chips
         Scanner check = new Scanner(System.in);
@@ -84,7 +91,8 @@ public class Screen {
 
         if (checkout == 1) {
             System.out.println("Generating your receipt...");
-            Receipt.generate("Total order price: $" + totalPrice, totalPrice, totalPrice);
+            System.out.println(fixings + ", " + totalPrice);
+            Receipt.generate(fixings, totalPrice);
             //The receipt must be generated from a localDateTime, so the name will be formatted for it
         }
         if (checkout == 2) {
@@ -92,4 +100,5 @@ public class Screen {
         }
         //Buffered Writer yippee
     }
+
 }
