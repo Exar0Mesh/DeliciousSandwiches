@@ -5,16 +5,17 @@ import java.util.Scanner;
 public class Sandwich {
     private int size;
     private double price;
-    private String bread, meat, cheese;
+    private String bread, meat, cheese, toasted;
 
     public Sandwich() { }
 
-    public Sandwich(int size, double price, String bread, String meat, String cheese) {
+    public Sandwich(int size, double price, String bread, String meat, String cheese, String toasted) {
         this.size = size;
         this.price = price;
         this.bread = bread;
         this.meat = meat;
         this.cheese = cheese;
+        this.toasted = toasted;
     }
 
     public String readSandwich(Scanner scanner) {
@@ -51,9 +52,18 @@ public class Sandwich {
                 price = getPrice();
             }
 
+            System.out.println("Would you like your bread toasted?");
+            String toast = scanner.nextLine();
+
+            if (toast.equalsIgnoreCase("yes")) {
+                toasted = "(toasted)";
+            } else {
+                toasted = "()";
+            }
+
             System.out.println("Here is your sandwich!");
-            System.out.println(size + "\" " + bread + " bread " + meat + " sandwich with " + cheese + " cheese, " + price + "\n");
-            return size + bread + meat + cheese + price;
+            System.out.println(size + "\" " + bread + " bread " + toasted + meat + " sandwich with " + cheese + " cheese, " + price + "\n");
+            return size + bread + meat + cheese + toasted + price;
     }
     public double getExtra() {
 
@@ -137,5 +147,13 @@ public class Sandwich {
 
     public void setCheese(String cheese) {
         this.cheese = cheese;
+    }
+
+    public String getToasted() {
+        return toasted;
+    }
+
+    public void setToasted(String toasted) {
+        this.toasted = toasted;
     }
 }

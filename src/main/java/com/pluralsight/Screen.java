@@ -41,7 +41,8 @@ public class Screen {
                         sandwich.readSandwich(scanner);
                         double sandwichPrice = (sandwich.getPrice());
                         totalPrice += sandwichPrice;
-                        fixings.add("Sandwich: " + sandwich.getBread() + ", " + sandwich.getMeat() + ", " + sandwich.getSize() + "\", - $" + sandwich.getPrice());
+                        fixings.add("Sandwich: " + sandwich.getBread() + sandwich.getToasted() + ", " + sandwich.getMeat() + ", "
+                                + sandwich.getSize() + "\", - $" + sandwich.getPrice());
                         break;
                     case 2:
                         System.out.println("Drinks! \n");
