@@ -1,3 +1,0 @@
-Sandwich Details: [Wheat, steak, 4", - $7.25, white, ham, 8", - $10.5, Drink:  - $3.0]
-Total Price: $20.75
------------------------------
