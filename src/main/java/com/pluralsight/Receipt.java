@@ -10,9 +10,6 @@ public class Receipt {
     public static void generate(String orderDetails, double totalPrice) {
 
         try {
-            //1. The file is not printing anything
-            //2. Total price is nothing
-            //3. Idk whats wrong
             FileWriter fileWriter = new FileWriter("src/main/resources/" + fileName() + ".txt", true);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write("Sandwich Details: " + orderDetails);
@@ -30,7 +27,6 @@ public class Receipt {
         }
     }
 
-    //Generating the fileName using LocalDateTime for the receipt
     public static String fileName() {
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");

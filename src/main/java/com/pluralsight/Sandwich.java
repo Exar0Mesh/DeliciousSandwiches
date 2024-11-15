@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Sandwich {
@@ -21,32 +19,31 @@ public class Sandwich {
 
     public String readSandwich(Scanner scanner) {
 
-            System.out.println("Select your bread choice: ");
-            System.out.println("Wheat bread, oat bread, almond bread, 2% bread...wait this list is milk");
+            System.out.println("Select your bread choice: \n");
+            System.out.println("Wheat, white, rye, wrap");
             scanner.nextLine();
             String bread = scanner.nextLine();
-            System.out.println(bread);
-            this.setBread(bread);
-            //This could easily be the bread choice
 
-            System.out.println("Select your sandwich size: ");
-            System.out.println("4\", 8\", or 12\"");
+            System.out.println("Select your sandwich size in inches: \n");
+            System.out.println("4, 8, or 12");
             int size = scanner.nextInt();
-            System.out.println(size);
-            this.setSize(size);
-            //small, medium, large will yield various prices
 
-            System.out.println("Toppings: ");
+            System.out.println("Now for the Toppings: \n");
+
             System.out.println("Select your meat choice: steak, ham, salami, roast beef, chicken, bacon");
             scanner.nextLine();
             String meat = scanner.nextLine();
-            this.setMeat(meat);
 
             System.out.println("Select your cheese: american, provolone, cheddar, swiss");
             String cheese = scanner.nextLine();
 
-            System.out.println("Would you like extra meat or cheese?");
+            System.out.println("Would you like extra meat or cheese? (YES/NO)");
             String option = scanner.nextLine();
+
+        this.setBread(bread);
+        this.setSize(size);
+        this.setMeat(meat);
+        this.setCheese(cheese);
 
             if (option.equalsIgnoreCase("yes")) {
                 price = getPrice() + getExtra();
@@ -54,11 +51,9 @@ public class Sandwich {
                 price = getPrice();
             }
 
-
             System.out.println("Here is your sandwich!");
-            System.out.println(size + " " + bread + " bread " + meat + " sandwich with " + cheese + " cheese " + price);
+            System.out.println(size + "\" " + bread + " bread " + meat + " sandwich with " + cheese + " cheese, " + price + "\n");
             return size + bread + meat + cheese + price;
-            //price is not generating
     }
     public double getExtra() {
 
@@ -94,13 +89,6 @@ public class Sandwich {
             double extra = (extraMeat * upMeat) + (extraCheese * upCheese);
             return extra;
     }
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public double getPrice() {
        if (size == 4) {
@@ -117,6 +105,14 @@ public class Sandwich {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getBread() {
